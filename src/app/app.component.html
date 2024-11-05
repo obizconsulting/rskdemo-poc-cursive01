@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="frame">
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <button (click)="switchToDrawMode()">Draw Mode</button>
+    <button (click)="switchToSelectMode()">Select Mode</button>
+    <button (click)="switchToDragMode()">Drag Mode</button>
+    <button (click)="switchToRotateMode()">Rotate Mode</button>
+  </div>
+  <div class="frame">
+    <textarea id="svg-code" readonly (mouseup)="highlightSelectedPath()"></textarea>
+    <input type="range" min="0" max="100" value="0" (input)="updateSlider($event)">
+    <button (click)="isolateSegment()">Isolate Segment</button>
+  </div>
+  <div class="frame">
+    <textarea id="normalized-svg" readonly></textarea>
+  </div>
+</div>
+<button (click)="saveStroke()">Save Stroke</button>
+<div>
+  <table id="segments-table">
+    <thead>
+      <tr>
+        <th>Segment</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let segment of segments; let i = index">
+        <td>{{ segment }}</td>
+        <td><button (click)="removeSegment(i)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="saveToDynamoDB()">Save to DynamoDB</button>
+</div>
